@@ -153,7 +153,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update summary
                 updateSummaryCards(parsedWorkflowData);
                 
-                showNotification('Analysis completed successfully!', 'success');
+                // Scramble sensitive data in the left pane after analysis
+                scrambleSensitiveData();
+                
+                showNotification('Analysis completed successfully! Sensitive data has been scrambled for privacy.', 'success');
             } catch (error) {
                 console.error('Analysis error:', error);
                 showNotification('Error during analysis. Please check your log format.', 'error');
@@ -541,6 +544,12 @@ document.addEventListener('DOMContentLoaded', function() {
         parsedWorkflowData = null;
         filterMinOccurrences = false;
 
+        // Remove privacy indicator if present
+        const existingIndicator = logInput.parentNode.querySelector('.privacy-indicator');
+        if (existingIndicator) {
+            existingIndicator.remove();
+        }
+
         // Reset results container
         resultsContainer.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full text-center">
@@ -742,3 +751,81 @@ window.WorkflowAnalyzer = {
         }
     }
 };
+
+// Privacy Protection: Scramble sensitive data in the input area
+function scrambleSensitiveData() {
+    const logContent = logInput.value;
+    if (!logContent) return;
+
+    // Create scrambling patterns for different types of sensitive data
+    let scrambledContent = logContent;
+
+    // 1. Scramble workflow names (after "Processing Workflow" or "workflow")
+    scrambledContent = scrambledContent.replace(
+        /(\bProcessing\s+Workflow\s+)(\w+)/gi,
+        '$1[WORKFLOW-' + Math.random().toString(36).substr(2, 6).toUpperCase() + ']'
+    );
+
+    // 2. Scramble workstep names (after "Workstep")
+    scrambledContent = scrambledContent.replace(
+        /(\bWorkstep\s+)(\w+)/gi,
+        '$1[STEP-' + Math.random().toString(36).substr(2, 6).toUpperCase() + ']'
+    );
+
+    // 3. Scramble WorkAction values
+    scrambledContent = scrambledContent.replace(
+        /(\bWorkAction\s+)(\w+)/gi,
+        '$1[ACTION-' + Math.random().toString(36).substr(2, 4).toUpperCase() + ']'
+    );
+
+    // 4. Scramble case IDs (numbers after "case id")
+    scrambledContent = scrambledContent.replace(
+        /(\bcase\s+id\s*[-–]\s*)(\d+)/gi,
+        '$1[CASE-' + Math.random().toString(36).substr(2, 8).toUpperCase() + ']'
+    );
+
+    // 5. Scramble old/new workflow codes in "Processed workflow task" lines
+    scrambledContent = scrambledContent.replace(
+        /(\bold\s+workflow\s+code\s+is\s+)(\w+)(\s+new\s+workflow\s+code\s+is\s+)(\w+)/gi,
+        '$1[WF-' + Math.random().toString(36).substr(2, 4).toUpperCase() + ']$3[WF-' + Math.random().toString(36).substr(2, 4).toUpperCase() + ']'
+    );
+
+    // 6. Scramble old/new workstep codes in "Processed workstep task" lines
+    scrambledContent = scrambledContent.replace(
+        /(\bold\s+workstep\s+code\s+is\s+)(\w+)(\s+new\s+workstep\s+code\s+is\s+)(\w+)/gi,
+        '$1[STEP-' + Math.random().toString(36).substr(2, 4).toUpperCase() + ']$3[STEP-' + Math.random().toString(36).substr(2, 4).toUpperCase() + ']'
+    );
+
+    // 7. General workflow/workstep pattern scrambling (quoted formats)
+    scrambledContent = scrambledContent.replace(
+        /(['"])[A-Z][A-Z0-9_]+\1/g,
+        () => '"[DATA-' + Math.random().toString(36).substr(2, 6).toUpperCase() + ']"'
+    );
+
+    // Update the textarea with scrambled content
+    logInput.value = scrambledContent;
+
+    // Add a visual indicator that data has been scrambled
+    const indicator = document.createElement('div');
+    indicator.innerHTML = `
+        <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 text-yellow-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                <span class="text-sm font-medium text-yellow-800">
+                    🔒 Privacy Protected: Sensitive data has been scrambled for security
+                </span>
+            </div>
+        </div>
+    `;
+
+    // Insert the indicator after the textarea
+    const existingIndicator = logInput.parentNode.querySelector('.privacy-indicator');
+    if (existingIndicator) {
+        existingIndicator.remove();
+    }
+    
+    indicator.classList.add('privacy-indicator');
+    logInput.parentNode.appendChild(indicator);
+}
