@@ -1,0 +1,358 @@
+/* 
+ * Workflow Workstep Log Analyzer - Custom Styles
+ * Author: Asif Peshkar @ Nexum Software
+ * 
+ * This file contains custom CSS overrides and additional styles
+ * not covered by TailwindCSS framework.
+ */
+
+/* Initial page load animation */
+body {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Footer responsive behavior */
+@media (max-width: 1024px) {
+    footer.sticky {
+        position: static !important;
+        bottom: auto !important;
+    }
+}
+
+@media (min-width: 1025px) {
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .container {
+        flex: 1;
+    }
+}
+
+/* Enhanced text shadow utility */
+.text-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced shadow utilities */
+.shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Custom scrollbar for textarea and results container */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Apply custom scrollbar to specific elements */
+#logInput,
+#resultsContainer {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+/* Enhanced focus states for better accessibility */
+.focus-enhanced:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 0 0 2px #3b82f6;
+}
+
+/* Smooth transitions for all interactive elements */
+button, input, textarea, select {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Enhanced button hover effects */
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+/* Loading animation keyframes */
+@keyframes pulse-subtle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Enhanced card shadows with hover effects */
+.card-enhanced {
+    transition: all 0.3s ease;
+}
+
+.card-enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* File upload zone enhanced styling */
+.upload-zone {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.upload-zone:hover::before {
+    left: 100%;
+}
+
+/* Results table enhanced styling */
+.results-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.results-table th {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.results-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.results-table tbody tr:hover {
+    background-color: #f0f9ff;
+    transform: scale(1.001);
+}
+
+/* Enhanced toggle switch styling */
+.toggle-switch {
+    appearance: none;
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 12px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-switch:checked {
+    background: #059669;
+}
+
+.toggle-switch::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-switch:checked::before {
+    transform: translateX(20px);
+}
+
+/* Progress bar animations */
+.progress-bar {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease-out;
+}
+
+.progress-bar.animate-in {
+    transform: scaleX(1);
+}
+
+/* Notification animations */
+.notification-enter {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.notification-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.3s ease-out;
+}
+
+.notification-exit {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.notification-exit-active {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease-in;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+    .mobile-stack {
+        flex-direction: column;
+    }
+    
+    .mobile-full-width {
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+    
+    .mobile-text-center {
+        text-align: center;
+    }
+    
+    /* Slide in animation for mobile */
+    .mobile-slide-in {
+        transform: translateX(-100%);
+        animation: slideInMobile 0.6s ease-out forwards;
+    }
+}
+
+@keyframes slideInMobile {
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Print styles for better printouts */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-break-inside-avoid {
+        break-inside: avoid;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .print-full-width {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .card-enhanced {
+        border: 2px solid #000;
+    }
+    
+    button {
+        border: 2px solid currentColor;
+    }
+    
+    .results-table th,
+    .results-table td {
+        border: 1px solid #000;
+    }
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode support (future enhancement) */
+@media (prefers-color-scheme: dark) {
+    /* Dark mode styles can be added here in future versions */
+}
+
+/* Focus visible for better keyboard navigation */
+.focus-visible:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Custom utility classes */
+.backdrop-blur-subtle {
+    backdrop-filter: blur(4px);
+}
+
+.border-gradient {
+    border-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) 1;
+}
+
+/* Loading spinner custom animation */
+.spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Enhanced glowing effect for top results */
+.top-result-glow {
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    animation: gentle-glow 3s ease-in-out infinite;
+}
+
+@keyframes gentle-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(34, 197, 94, 0.3);
+    }
+}

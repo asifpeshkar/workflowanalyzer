@@ -1,0 +1,17 @@
+Starting workflow processing for case id - 20778295
+Processing Workflow SWV Workstep SWVRETURN WorkAction Default
+Processed workflow task - old workflow code is SWV new workflow code is SWV
+Processed workstep task - old workstep code is SWVRETURN new workstep code is RECODEC
+Finished workflow processing for case id - 20778295
+
+Starting workflow processing for case id - 12345678
+Processing Workflow VULDCA Workstep START WorkAction Default
+Processed workflow task - old workflow code is VULDCA new workflow code is VULDCA
+Processed workstep task - old workstep code is START new workstep code is COMPLETE
+Finished workflow processing for case id - 12345678
+
+Starting workflow processing for case id - 87654321
+Processing Workflow WARRANT Workstep WRCOURT WorkAction Default
+Processed workflow task - old workflow code is WARRANT new workflow code is WARRANT
+Processed workstep task - old workstep code is WRCOURT new workstep code is CLOSED
+Finished workflow processing for case id - 87654321

@@ -1,0 +1,26 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Main Title -->
+  <text x="600" y="250" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="800" font-size="72">🧩 Workflow Analyzer</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="320" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-family="Inter, system-ui, sans-serif" font-weight="600" font-size="36">Nexum Automation Insights</text>
+  
+  <!-- Description -->
+  <text x="600" y="380" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="24">Analyze workflow log files and generate detailed reports</text>
+  
+  <!-- Features -->
+  <text x="600" y="450" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-family="Inter, system-ui, sans-serif" font-weight="400" font-size="20">📁 File Upload • 🔍 Pattern Recognition • 📊 Visual Analytics • 💾 CSV Export</text>
+  
+  <!-- Footer -->
+  <text x="600" y="550" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-family="Inter, system-ui, sans-serif" font-weight="500" font-size="18">Built by Asif Peshkar @ Nexum Software</text>
+</svg>
